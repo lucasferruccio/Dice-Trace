@@ -1,0 +1,22 @@
+.config-icon-button {
+    background: transparent;
+    padding: 0;
+    color: white;
+    line-height: normal;
+    border: 0;
+    align-self: center;
+}
+
+.config-icon-button > i {
+    margin-right: 0;
+}
+
+.config-icon-button:hover, .config-icon-button:focus {
+    box-shadow: none;
+    text-shadow: 0 0 5px red;
+}
+
+#showWebcam {
+    height: 12px;
+    width: 12px;
+}

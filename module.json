@@ -1,0 +1,31 @@
+{
+  "id": "dice-trace",
+  "title": "Dice Trace",
+  "version": "0.7.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "description": "A module that uses computer vision to track and roll dices on the game.",
+  "authors": [
+    {
+      "name": "Lucas Ferruccio",
+      "email": "lucaspaiva.ufrpe@gmail.com",
+      "discord": "Sapipo",
+      "flags": {}
+    }
+  ],
+  "scripts": [
+    "scripts/dicetrace.js"
+  ],
+  "languages": [
+      {
+          "lang": "en",
+          "name": "English",
+          "path": "languages/en.json"
+      }
+  ],
+  "styles": [
+    "styles/dicetrace.css"
+  ]
+}

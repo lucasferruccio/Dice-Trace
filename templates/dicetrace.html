@@ -1,0 +1,62 @@
+<section class="window-content">
+    <form>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <!-- Script para Checar a mudança na detectedDices -->
+        <script>
+          $(document).ready(function(){
+            <!-- Selecionar o elemento que queremos observar -->
+            const diceDiv = document.getElementById('detectedDices');
+
+            <!-- Criar um observador de mudanças -->
+            const observer = new MutationObserver(async function(mutationsList) {
+              for(let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                  const dices = $("#detectedDices").text().trim();
+                  <!-- Rolar os dados encontrados na imagem com o valor atualizado do div detectedDices -->
+                  let roll = new Roll(dices);
+                  await roll.evaluate(); <!-- Avalia a rolagem -->
+                  <!-- Enviar o resultado para o chat -->
+                  roll.toMessage({
+                      speaker: ChatMessage.getSpeaker(),
+                      flavor: `Rolling a d20!`
+                  });
+                }
+              }
+            });
+
+            // Configurar o observador para monitorar mudanças nos filhos do elemento
+            observer.observe(diceDiv, { childList: true });
+          });
+        </script>
+
+        <!-- Script para fazer a animação de aumentar e diminuir a webcam -->
+        <script>
+            $('#showWebcam').on('click', function(){
+                if($('#webcamVideo').height() == 200){
+                    $('#webcamVideo').animate({"height" : "0px"}, 0);
+                    $('#webcamVideo').animate({"width" : "0px"}, 0);
+                }else{
+                    $('#webcamVideo').animate({"height" : "200px"}, 200);
+                    $('#webcamVideo').animate({"width" : "200px"}, 200);
+                }
+            });
+        </script>
+
+        <link rel="stylesheet" href="../styles/dicetrace.css">
+
+        <div class="video-wrap">
+        <video id="webcamVideo" playsinline autoplay width="200" height="200"></video>
+        </div>
+
+        <div class="controller">
+            <button type="button" id="snap" title="Roll the dice">Roll</button>
+        </div>
+
+        <canvas id="webcamCanvas" width="1280" height="720" style="display: none;"></canvas>
+
+        <div id="detectedDices"></div>
+
+        <input type="checkbox" id="showWebcam" checked>Show Webcam</input>
+
+    </form>
+</section>
